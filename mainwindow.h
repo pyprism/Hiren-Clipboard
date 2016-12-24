@@ -15,6 +15,13 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+    QString hiren;
+
+
+
+public slots:
+    void getText();
+
 private:
     Ui::MainWindow *ui;
 };
