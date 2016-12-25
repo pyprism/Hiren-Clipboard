@@ -7,6 +7,7 @@ Login::Login(QWidget *parent) :
     ui(new Ui::Login)
 {
     ui->setupUi(this);
+    ui->lineEdit_password->setEchoMode(QLineEdit::Password);
     auto path = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
     if (path.isEmpty()) qFatal("Cannot determine settings storage location");
     QDir d{path};
