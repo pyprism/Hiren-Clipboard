@@ -6,6 +6,7 @@
 #include <QStandardPaths>
 #include <QtSql>
 #include <QFileInfo>
+#include "QtAwesome.h"
 
 void setupDB() {
     auto path = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
@@ -44,6 +45,8 @@ int main(int argc, char *argv[])
     app.setApplicationName("Hiren_Clipboard");
     app.setApplicationDisplayName("Hiren Clipboard");
     setupDB();
+    QtAwesome* awesome = new QtAwesome(&app);
+    awesome->initFontAwesome();
     Login w;
     w.show();
 
