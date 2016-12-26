@@ -35,3 +35,5 @@ HEADERS  += mainwindow.h \
 FORMS    += mainwindow.ui \
     login.ui \
     register.ui
+
+include(./lib/QtAwesome/QtAwesome/QtAwesome.pri)
