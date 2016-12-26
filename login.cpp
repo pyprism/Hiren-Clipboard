@@ -1,6 +1,7 @@
 #include "login.h"
 #include "ui_login.h"
 #include <QDebug>
+#include "mainwindow.h"
 
 Login::Login(QWidget *parent) :
     QMainWindow(parent),
@@ -25,7 +26,6 @@ Login::~Login()
 void Login::on_pushButton_clicked()
 {
     QString username, password;
-    //bool success = false;
     username = ui->lineEdit_username->text();
     password = ui->lineEdit_password->text();
 
@@ -37,15 +37,19 @@ void Login::on_pushButton_clicked()
     QSqlQuery query;
     query.prepare("select * from user where username = (:username) and password = (:password)");
     query.bindValue(":username", username);
-    query.bindValue(":password", password);
+    query.bindValue(":password", QCryptographicHash::hash(password.toUtf8(), QCryptographicHash::Sha256));
     if(query.exec()) {
         if (query.next())
-           {
-              qDebug() << "its working babe :D ";
-           }
+        {
+            if(query.value(0).toInt() == 1) {
+                this->hide();
+                MainWindow *mainWindow = new MainWindow(this);
+                mainWindow->show();
+            }
+
+        }
         else {
-            ui->statusbar->showMessage("Username/Password is not correct", 5000);
-            qDebug() << "Username/Password is not correct";
+            ui->statusbar->showMessage("Username/Password is not correct", 8000);
         }
 
     }
@@ -53,4 +57,12 @@ void Login::on_pushButton_clicked()
         qDebug() << "...";
     }
 
+}
+
+void Login::on_pushButton_2_clicked()
+{
+    this->hide();
+    Register reg;
+    reg.setModal(true);
+    reg.exec();
 }
