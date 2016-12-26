@@ -5,6 +5,9 @@
 #include <QDir>
 #include <QStandardPaths>
 #include <QtSql>
+#include "register.h"
+#include <QMessageBox>
+#include <QCryptographicHash>
 
 namespace Ui {
 class Login;
@@ -20,6 +23,8 @@ public:
 
 private slots:
     void on_pushButton_clicked();
+
+    void on_pushButton_2_clicked();
 
 private:
     Ui::Login *ui;
