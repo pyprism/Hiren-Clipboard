@@ -14,13 +14,13 @@
    <string>Login</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>80</x>
       <y>60</y>
       <width>193</width>
-      <height>85</height>
+      <height>88</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -50,7 +50,14 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit_password"/>
+          <widget class="QLineEdit" name="lineEdit_password">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>
@@ -83,7 +90,7 @@
      <x>0</x>
      <y>0</y>
      <width>429</width>
-     <height>21</height>
+     <height>19</height>
     </rect>
    </property>
   </widget>
