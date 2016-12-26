@@ -26,15 +26,15 @@ void MainWindow::getText()
     //   qDebug() << clipboard;
 
     QClipboard *clipboard = QGuiApplication::clipboard();
-    QString originalText = clipboard->text();
+    const QMimeData *mime = clipboard->mimeData (QClipboard::Selection);
+    //QString originalText = clipboard->text();
+    QString originalText = mime->text ();
     if(!originalText.isEmpty()) {
         if(hiren == originalText)
             return;
         else if(hiren != originalText){
             hiren = originalText;
-            if(!originalText.startsWith("file:///")){
-                qDebug() << originalText;
-            }
+            qDebug() << originalText;
 
         }
     }
