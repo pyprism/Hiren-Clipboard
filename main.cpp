@@ -32,8 +32,6 @@ void setupDB() {
             db.close();
             //if(!db.isOpen())
             //    qFatal("Cannot open the database");
-        } else {
-            qDebug() << "db exists";
         }
     }
 }
