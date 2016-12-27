@@ -27,7 +27,7 @@ void Register::on_pushButton_register_clicked()
     if (query.next()) {
         int rows= query.value(0).toInt();
         if(rows == 1){
-            QMessageBox::warning (this, "Warning", "There is already a user exists.");
+            QMessageBox::warning (this, "Warning", "There is already an user exists.");
             return;
         }
      }
