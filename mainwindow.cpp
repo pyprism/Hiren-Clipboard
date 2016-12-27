@@ -3,6 +3,7 @@
 #include <QClipboard>
 #include <QDebug>
 #include <QTimer>
+#include <QSysInfo>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -21,21 +22,23 @@ MainWindow::~MainWindow()
 
 void MainWindow::getText()
 {
-    // QString clipboard = QApplication::clipboard()->text();
-    //if(!clipboard.isEmpty())
-    //   qDebug() << clipboard;
+    QString originalText;
+    if(QSysInfo::productType() == "windows") {
+        QString clipboard = QApplication::clipboard()->text();
+        if(hiren != clipboard) {
+            if(!clipboard.isEmpty() && !clipboard.startsWith("file://")){
+                hiren = clipboard;
+                originalText = clipboard;
+            }
+        }
 
-    QClipboard *clipboard = QGuiApplication::clipboard();
-    const QMimeData *mime = clipboard->mimeData (QClipboard::Selection);
-    //QString originalText = clipboard->text();
-    QString originalText = mime->text ();
-    if(!originalText.isEmpty()) {
-        if(hiren == originalText)
-            return;
-        else if(hiren != originalText){
+    } else {
+        QClipboard *clipboard = QGuiApplication::clipboard();
+        const QMimeData *mime = clipboard->mimeData (QClipboard::Selection);
+        originalText = mime->text ();
+        if(hiren != originalText) {
             hiren = originalText;
             qDebug() << originalText;
-
         }
     }
 }
