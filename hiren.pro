@@ -8,7 +8,7 @@ QT       += core gui sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = tempqt
+TARGET = hiren_clipboard
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use
@@ -37,3 +37,9 @@ FORMS    += mainwindow.ui \
     register.ui
 
 include(./lib/QtAwesome/QtAwesome/QtAwesome.pri)
+
+win32.LIBS += -LC:/OpenSSL-Win64/lib
+win32.INCLUDEPATH += C:/OpenSSL-Win64/include
+
+unix.CONFIG += link_pkgconfig
+unix.PKGCONFIG += openssl
