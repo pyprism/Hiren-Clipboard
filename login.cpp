@@ -2,6 +2,7 @@
 #include "ui_login.h"
 #include <QDebug>
 #include "mainwindow.h"
+#include "QtAwesome.h"
 
 Login::Login(QWidget *parent) :
     QMainWindow(parent),
@@ -9,6 +10,10 @@ Login::Login(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->lineEdit_password->setEchoMode(QLineEdit::Password);
+    QtAwesome* awesome = new QtAwesome(this);
+    awesome->initFontAwesome();
+    ui->pushButton->setIcon(awesome->icon( "signin" ));
+    ui->pushButton_2->setIcon(awesome->icon( "userplus" ));
     auto path = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
     if (path.isEmpty()) qFatal("Cannot determine settings storage location");
     QDir d{path};
