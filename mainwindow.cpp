@@ -29,6 +29,7 @@ void MainWindow::getText()
             if(!clipboard.isEmpty() && !clipboard.startsWith("file://")){
                 hiren = clipboard;
                 originalText = clipboard;
+                qDebug() << originalText;
             }
         }
 
