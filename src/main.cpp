@@ -7,6 +7,7 @@
 #include <QtSql>
 #include <QFileInfo>
 #include "QtAwesome.h"
+#include "db.h"
 //#include <openssl/aes.h>
 
 
@@ -46,7 +47,9 @@ int main(int argc, char *argv[])
     app.setOrganizationName("Pyprism");
     app.setApplicationName("Hiren_Clipboard");
     app.setApplicationDisplayName("Hiren Clipboard");
-    setupDB();
+    //setupDB();
+    DB db;
+    db.createDb ();
     QtAwesome *awesome = new QtAwesome(&app);
     awesome->initFontAwesome();
     app.setWindowIcon(awesome->icon( "clipboard" ));
