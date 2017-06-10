@@ -2,7 +2,6 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QSqlTableModel>
 
 namespace Ui {
 class MainWindow;
@@ -17,11 +16,9 @@ public:
     ~MainWindow();
 
     QString hiren;
+    bool setItem(const QString item);
 private:
     Ui::MainWindow *ui;
-
-//    void initDb();
-//    QSqlTableModel* initModel();
 
 public slots:
     void getText();
