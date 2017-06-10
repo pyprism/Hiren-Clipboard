@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QClipboard>
+#include <QListWidgetItem>
 #include <QDebug>
 #include <QTimer>
 #include <QSysInfo>
@@ -11,6 +12,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    ui->listWidget->setSortingEnabled (true);
+
     QTimer *timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(getText()));
     timer->start(1000);
@@ -21,6 +24,9 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+/**
+* @brief MainWindow::getText get text from clipboard
+*/
 void MainWindow::getText()
 {
     QString originalText;
@@ -40,7 +46,18 @@ void MainWindow::getText()
         originalText = mime->text ();
         if(hiren != originalText) {
             hiren = originalText;
-            qDebug() << originalText;
+            //qDebug() << originalText;
+            setItem (originalText);
         }
     }
+}
+
+
+bool MainWindow::setItem(const QString item)
+{
+    auto x = ui->listWidget->findItems (item, Qt::MatchExactly);
+
+    qDebug() << x;
+    ui->listWidget->addItem (item);
+    return true;
 }
