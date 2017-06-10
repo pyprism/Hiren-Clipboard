@@ -16,11 +16,15 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+    QString hiren;
 private:
     Ui::MainWindow *ui;
 
-    void initDb();
-    QSqlTableModel* initModel();
+//    void initDb();
+//    QSqlTableModel* initModel();
+
+public slots:
+    void getText();
 };
 
 #endif // MAINWINDOW_H
