@@ -22,6 +22,7 @@ private:
 
 public slots:
     void getText();
+    void trayIconQuitAction_triggered();
 };
 
 #endif // MAINWINDOW_H
