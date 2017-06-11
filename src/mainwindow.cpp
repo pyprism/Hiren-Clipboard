@@ -6,17 +6,40 @@
 #include <QTimer>
 #include <QSysInfo>
 #include <QMimeData>
+#include <QSystemTrayIcon>
+#include <QAction>
+#include <QMenu>
+#include <QIcon>
+#include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    ui->listWidget->setSortingEnabled (true);
+
+    QAction* quitAction = new QAction("Quit", this);
+
+    QMenu* trayIconMenu = new QMenu(this);
+    trayIconMenu->addAction(quitAction);
+
+    QSystemTrayIcon* trayIcon = new QSystemTrayIcon(this);
+    trayIcon->setContextMenu(trayIconMenu);
+    QIcon trayIconIcon(":/new/icon/32x32.png");
+    trayIcon->setIcon(trayIconIcon);
+    trayIcon->show();
+
+    QObject::connect(quitAction, SIGNAL(triggered()), this, SLOT(trayIconQuitAction_triggered()));
 
     QTimer *timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(getText()));
     timer->start(1000);
+}
+
+void MainWindow::trayIconQuitAction_triggered() {
+  //MessageBoxes::info("Close item clicked");
+    qDebug() << "tray icon";
+    QApplication::quit();
 }
 
 MainWindow::~MainWindow()
