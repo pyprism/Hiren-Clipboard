@@ -1,6 +1,5 @@
 <RCC>
     <qresource prefix="/new/icon">
-        <file>64x64.png</file>
         <file>32x32.png</file>
     </qresource>
 </RCC>
