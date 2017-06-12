@@ -20,6 +20,7 @@ public:
 private:
     Ui::MainWindow *ui;
 
+    void trayIconInitializer();
 public slots:
     void getText();
     void trayIconQuitAction_triggered();
