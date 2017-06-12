@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/new/icon">
         <file>32x32.png</file>
+        <file>hiren-clipboard.svg</file>
     </qresource>
 </RCC>
