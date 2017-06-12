@@ -33,7 +33,7 @@ void MainWindow::trayIconInitializer() {
 
     QSystemTrayIcon* trayIcon = new QSystemTrayIcon(this);
     trayIcon->setContextMenu(trayIconMenu);
-    QIcon trayIconIcon(":/new/icon/32x32.png");
+    QIcon trayIconIcon(":/new/icon/hiren-clipboard.svg");
     trayIcon->setIcon(trayIconIcon);
     trayIcon->show();
 
