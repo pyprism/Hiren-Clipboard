@@ -18,6 +18,14 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    trayIconInitializer ();
+
+    QTimer *timer = new QTimer(this);
+    connect(timer, SIGNAL(timeout()), this, SLOT(getText()));
+    timer->start(1000);
+}
+
+void MainWindow::trayIconInitializer() {
     QAction* quitAction = new QAction("Quit", this);
 
     QMenu* trayIconMenu = new QMenu(this);
@@ -30,10 +38,6 @@ MainWindow::MainWindow(QWidget *parent) :
     trayIcon->show();
 
     QObject::connect(quitAction, SIGNAL(triggered()), this, SLOT(trayIconQuitAction_triggered()));
-
-    QTimer *timer = new QTimer(this);
-    connect(timer, SIGNAL(timeout()), this, SLOT(getText()));
-    timer->start(1000);
 }
 
 void MainWindow::trayIconQuitAction_triggered() {
@@ -78,9 +82,11 @@ void MainWindow::getText()
 
 bool MainWindow::setItem(const QString item)
 {
-    auto x = ui->listWidget->findItems (item, Qt::MatchExactly);
+    QList<QListWidgetItem *> find = ui->listWidget->findItems (item, Qt::MatchExactly);
 
-    qDebug() << x;
-    ui->listWidget->addItem (item);
+    if (find.size() == 0) {
+        ui->listWidget->addItem (item);
+    } // TODO remove item then add the duplicate item again
+
     return true;
 }
