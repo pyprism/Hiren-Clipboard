@@ -80,7 +80,7 @@ void MainWindow::getText()
 }
 
 
-bool MainWindow::setItem(const QString item)
+void MainWindow::setItem(const QString item)
 {
     QList<QListWidgetItem *> find = ui->listWidget->findItems (item, Qt::MatchExactly);
 
@@ -88,5 +88,4 @@ bool MainWindow::setItem(const QString item)
         ui->listWidget->addItem (item);
     } // TODO remove item then add the duplicate item again
 
-    return true;
 }

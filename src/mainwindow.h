@@ -15,12 +15,12 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-    QString hiren;
-    bool setItem(const QString item);
 private:
     Ui::MainWindow *ui;
 
     void trayIconInitializer();
+    QString hiren;
+    void setItem(const QString item);
 public slots:
     void getText();
     void trayIconQuitAction_triggered();
