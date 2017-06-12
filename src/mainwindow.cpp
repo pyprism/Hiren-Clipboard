@@ -41,7 +41,7 @@ void MainWindow::trayIconInitializer() {
 }
 
 void MainWindow::trayIconQuitAction_triggered() {
-  //MessageBoxes::info("Close item clicked");
+    //MessageBoxes::info("Close item clicked");
     qDebug() << "tray icon";
     QApplication::quit();
 }
@@ -84,8 +84,15 @@ void MainWindow::setItem(const QString item)
 {
     QList<QListWidgetItem *> find = ui->listWidget->findItems (item, Qt::MatchExactly);
 
-    if (find.size() == 0) {
-        ui->listWidget->addItem (item);
+    if (find.size() == 0) {  // check for duplicate
+        if (item.size () != 0) { //check empty string
+            if(item.size() >= 50){
+                QString hiren = item.mid(0, 49) + "...";
+                ui->listWidget->addItem (hiren);
+            } else {
+                ui->listWidget->addItem (item);
+            }
+        }
     } // TODO remove item then add the duplicate item again
 
 }
