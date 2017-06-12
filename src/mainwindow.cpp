@@ -1,16 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <QClipboard>
-#include <QListWidgetItem>
-#include <QDebug>
-#include <QTimer>
-#include <QSysInfo>
-#include <QMimeData>
-#include <QSystemTrayIcon>
-#include <QAction>
-#include <QMenu>
-#include <QIcon>
-#include <QMessageBox>
+
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -38,11 +28,16 @@ void MainWindow::trayIconInitializer() {
     trayIcon->show();
 
     QObject::connect(quitAction, SIGNAL(triggered()), this, SLOT(trayIconQuitAction_triggered()));
+    QObject::connect(ui->listWidget, SIGNAL(itemClicked(QListWidgetItem*)),
+                this, SLOT(onListWidgetItemClicked(QListWidgetItem*)));
+}
+
+void MainWindow::onListWidgetItemClicked(QListWidgetItem* item) {
+    ui->textBrowser->setText (item->text());
 }
 
 void MainWindow::trayIconQuitAction_triggered() {
     //MessageBoxes::info("Close item clicked");
-    qDebug() << "tray icon";
     QApplication::quit();
 }
 
@@ -86,12 +81,7 @@ void MainWindow::setItem(const QString item)
 
     if (find.size() == 0) {  // check for duplicate
         if (item.size () != 0) { //check empty string
-            if(item.size() >= 50){
-                QString hiren = item.mid(0, 49) + "...";
-                ui->listWidget->addItem (hiren);
-            } else {
                 ui->listWidget->addItem (item);
-            }
         }
     } // TODO remove item then add the duplicate item again
 
