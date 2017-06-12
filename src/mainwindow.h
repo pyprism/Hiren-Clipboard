@@ -2,6 +2,17 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QClipboard>
+#include <QListWidgetItem>
+#include <QDebug>
+#include <QTimer>
+#include <QSysInfo>
+#include <QMimeData>
+#include <QSystemTrayIcon>
+#include <QAction>
+#include <QMenu>
+#include <QIcon>
+#include <QMessageBox>
 
 namespace Ui {
 class MainWindow;
@@ -24,6 +35,8 @@ private:
 public slots:
     void getText();
     void trayIconQuitAction_triggered();
+protected slots:
+    void onListWidgetItemClicked(QListWidgetItem *item);
 };
 
 #endif // MAINWINDOW_H
