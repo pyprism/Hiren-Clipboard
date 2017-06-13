@@ -32,7 +32,6 @@ private:
 
     void trayIconInitializer();
     QString hiren;
-    QString selectedItemText;
     void setItem(const QString item);
 
 protected slots:
