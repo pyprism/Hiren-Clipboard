@@ -14,6 +14,7 @@
 #include <QIcon>
 #include <QMessageBox>
 
+
 namespace Ui {
 class MainWindow;
 }
@@ -31,14 +32,16 @@ private:
 
     void trayIconInitializer();
     QString hiren;
+    QString selectedItemText;
     void setItem(const QString item);
-public slots:
-    void getText();
-    void trayIconQuitAction_triggered();
+
 protected slots:
     void onListWidgetItemClicked(QListWidgetItem *item);
     void onShowHide_triggered();
     void changeEvent(QEvent *e);
+    void getText();
+    void trayIconQuitAction_triggered();
+    void doubleClicked(QListWidgetItem *item);
 };
 
 #endif // MAINWINDOW_H
