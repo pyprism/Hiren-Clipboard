@@ -10,6 +10,11 @@ MainWindow::MainWindow(QWidget *parent) :
 
     trayIconInitializer ();
 
+    QObject::connect(ui->listWidget, SIGNAL(itemClicked(QListWidgetItem*)),
+                this, SLOT(onListWidgetItemClicked(QListWidgetItem*)));
+    QObject::connect (ui->listWidget, SIGNAL(itemDoubleClicked(QListWidgetItem*)),
+                      this, SLOT(doubleClicked(QListWidgetItem*)));
+
     QTimer *timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(getText()));
     timer->start(1000);
@@ -32,19 +37,16 @@ void MainWindow::trayIconInitializer() {
 
     QObject::connect(quitAction, SIGNAL(triggered()), this, SLOT(trayIconQuitAction_triggered()));
     QObject::connect( hideAction, SIGNAL(triggered()), this, SLOT(onShowHide_triggered()) );
-    QObject::connect(ui->listWidget, SIGNAL(itemClicked(QListWidgetItem*)),
-                this, SLOT(onListWidgetItemClicked(QListWidgetItem*)));
-    QObject::connect (ui->listWidget, SIGNAL(itemDoubleClicked(QListWidgetItem*)),
-                      this, SLOT(doubleClicked(QListWidgetItem*)));
 }
 
 void MainWindow::doubleClicked(QListWidgetItem* item){
     if(QSysInfo::productType() == "windows") {
         QString clipboard = QApplication::clipboard()->text();
-        clipboard->setText (item->text (), QClipboard::Clipboard);
+        //clipboard->setText (item->text (), QClipboard::Clipboard);
     } else {
         QClipboard *clipboard = QGuiApplication::clipboard();
         clipboard->setText (item->text (), QClipboard::Clipboard);
+        system("notify-send 'Hiren-Clipboard' 'Text copied to clipboard.' '-t' 5000");
     }
 }
 
