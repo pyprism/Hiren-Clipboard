@@ -17,9 +17,12 @@ MainWindow::MainWindow(QWidget *parent) :
 
 void MainWindow::trayIconInitializer() {
     QAction* quitAction = new QAction("Quit", this);
+    QAction* hideAction = new QAction( "Show", this);
 
     QMenu* trayIconMenu = new QMenu(this);
+    trayIconMenu->addAction( hideAction );
     trayIconMenu->addAction(quitAction);
+
 
     QSystemTrayIcon* trayIcon = new QSystemTrayIcon(this);
     trayIcon->setContextMenu(trayIconMenu);
@@ -28,8 +31,36 @@ void MainWindow::trayIconInitializer() {
     trayIcon->show();
 
     QObject::connect(quitAction, SIGNAL(triggered()), this, SLOT(trayIconQuitAction_triggered()));
+    QObject::connect( hideAction, SIGNAL(triggered()), this, SLOT(onShowHide_triggered()) );
     QObject::connect(ui->listWidget, SIGNAL(itemClicked(QListWidgetItem*)),
                 this, SLOT(onListWidgetItemClicked(QListWidgetItem*)));
+}
+
+void MainWindow::changeEvent(QEvent* e)
+{
+    switch (e->type())
+    {
+        case QEvent::WindowStateChange:
+            {
+                if (this->windowState() & Qt::WindowMinimized)
+                {
+                   // if (Preferences::instance().minimizeToTray())
+                   // {
+                        QTimer::singleShot(250, this, SLOT(hide()));
+                   // }
+                }
+
+                break;
+            }
+        default:
+            break;
+    }
+
+    QMainWindow::changeEvent(e);
+}
+
+void MainWindow::onShowHide_triggered() {
+    show ();
 }
 
 void MainWindow::onListWidgetItemClicked(QListWidgetItem* item) {
@@ -37,7 +68,6 @@ void MainWindow::onListWidgetItemClicked(QListWidgetItem* item) {
 }
 
 void MainWindow::trayIconQuitAction_triggered() {
-    //MessageBoxes::info("Close item clicked");
     QApplication::quit();
 }
 
@@ -58,7 +88,7 @@ void MainWindow::getText()
             if(!clipboard.isEmpty() && !clipboard.startsWith("file://")){
                 hiren = clipboard;
                 originalText = clipboard;
-                qDebug() << originalText;
+                setItem (originalText);
             }
         }
 
@@ -68,7 +98,6 @@ void MainWindow::getText()
         originalText = mime->text ();
         if(hiren != originalText) {
             hiren = originalText;
-            //qDebug() << originalText;
             setItem (originalText);
         }
     }
