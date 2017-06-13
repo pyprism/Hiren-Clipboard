@@ -34,6 +34,18 @@ void MainWindow::trayIconInitializer() {
     QObject::connect( hideAction, SIGNAL(triggered()), this, SLOT(onShowHide_triggered()) );
     QObject::connect(ui->listWidget, SIGNAL(itemClicked(QListWidgetItem*)),
                 this, SLOT(onListWidgetItemClicked(QListWidgetItem*)));
+    QObject::connect (ui->listWidget, SIGNAL(itemDoubleClicked(QListWidgetItem*)),
+                      this, SLOT(doubleClicked(QListWidgetItem*)));
+}
+
+void MainWindow::doubleClicked(QListWidgetItem* item){
+    if(QSysInfo::productType() == "windows") {
+        QString clipboard = QApplication::clipboard()->text();
+        clipboard->setText (item->text (), QClipboard::Clipboard);
+    } else {
+        QClipboard *clipboard = QGuiApplication::clipboard();
+        clipboard->setText (item->text (), QClipboard::Clipboard);
+    }
 }
 
 void MainWindow::changeEvent(QEvent* e)
