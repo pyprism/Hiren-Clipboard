@@ -37,6 +37,8 @@ public slots:
     void trayIconQuitAction_triggered();
 protected slots:
     void onListWidgetItemClicked(QListWidgetItem *item);
+    void onShowHide_triggered();
+    void changeEvent(QEvent *e);
 };
 
 #endif // MAINWINDOW_H
