@@ -10,3 +10,10 @@ TEMPLATE = subdirs
 
 SUBDIRS += \
 	src
+
+unix: {
+    target.path = /opt/Hiren/Clipboard
+    INSTALLS += target
+}
+
+OTHER_FILES += debian/control
