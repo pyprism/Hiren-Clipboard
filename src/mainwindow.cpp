@@ -123,7 +123,7 @@ void MainWindow::setItem(const QString item)
     QList<QListWidgetItem *> find = ui->listWidget->findItems (item, Qt::MatchExactly);
 
     if (find.size() == 0) {  // check for duplicate
-        if (item.size () != 0) { //check empty string
+        if (!item.isEmpty ()) { //check empty string
                 ui->listWidget->addItem (item);
         }
     } // TODO remove item then add the duplicate item again
