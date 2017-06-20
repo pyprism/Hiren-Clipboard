@@ -1,8 +1,0 @@
-Source:	hiren-clipboard
-Section: misc
-Priority: extra
-Maintainer: Ashutosh Das <git.pyprism@gmail.com>
-Standards-Version: 3.9.6
-Package: Hiren-Clipboard
-Architecture: any
-Description: Simple Clipboard Manager
