@@ -18,4 +18,6 @@ SUBDIRS += \
 
 CONFIG += warn_on qt debug_and_release
 
-OTHER_FILES += debian/control
+OTHER_FILES += debian/control debian/rules debian/compat debian/changelog \
+               debian/copyright debian/dirs debian/packagename.install \
+               hiren-clipboard.desktop
