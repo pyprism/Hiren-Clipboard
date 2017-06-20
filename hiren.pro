@@ -11,9 +11,11 @@ TEMPLATE = subdirs
 SUBDIRS += \
 	src
 
-unix: {
-    target.path = /opt/Hiren/Clipboard
-    INSTALLS += target
-}
+#unix: {
+#    target.path = /opt/Hiren/Clipboard
+#    INSTALLS += target
+#}
+
+CONFIG += warn_on qt debug_and_release
 
 OTHER_FILES += debian/control

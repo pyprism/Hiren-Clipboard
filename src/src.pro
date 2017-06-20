@@ -36,3 +36,9 @@ FORMS    += mainwindow.ui
 
 RESOURCES += \
     ../img/img.qrc
+
+DESTDIR = ../bin
+MOC_DIR = ../build/moc
+RCC_DIR = ../build/rcc
+UI_DIR = ../build/ui
+unix:OBJECTS_DIR = ../build/o/unix
