@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Terminal=false
+Name=Hiren-Clipboard
+Exec=/opt/Hiren/Clipboard/Hiren-Clipboard %F
+Comment=Simple Clipboard Manager
+Icon=/usr/share/pixmaps/hiren-clipboard.svg
+StartupNotify=false
+Encoding=UTF-8
+Categories=Utils;
